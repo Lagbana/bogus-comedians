@@ -1,29 +1,27 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const SnapshotSchema = new Schema(
+const ComedianSchema = new Schema(
   {
-    domain: {
+    firstname: {
       type: String,
       required: true,
     },
-    url: {
+    lastname: {
       type: String,
       required: true,
     },
-    snapshot: {
+    avatar: {
       type: String,
       required: true,
     },
-    title: String,
-    browser: String,
-    depth: {
-      type: Number,
+    firstStandUpDate: {
+      bsonType: date,
       required: true,
     },
-    screenshot: {
-      required: true,
+    bestDadJoke: {
       type: String,
+      required: true,
     },
   },
   {
@@ -31,4 +29,4 @@ const SnapshotSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Snapshot", SnapshotSchema);
+module.exports = mongoose.model("Comedian", ComedianSchema);
