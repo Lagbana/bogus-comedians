@@ -15,10 +15,10 @@ const ComedianSchema = new Schema(
       type: String,
       required: true,
     },
-    firstStandUpDate: {
-      bsonType: date,
-      required: true,
-    },
+    // firstStandUpDate: {
+    //   bsonType: Date,
+    //   required: true,
+    // },
     bestDadJoke: {
       type: String,
       required: true,

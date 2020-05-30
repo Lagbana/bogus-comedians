@@ -7,9 +7,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const initializeRoutes = require('./routes')
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+// Regiser Models
+require("./models/comedian");
 
 mongoose.connect(process.env.MONGO_URI, {
     useCreateIndex: true,
@@ -34,5 +38,7 @@ app.use(bodyParser.json());
 app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
+
+initializeRoutes(app)
 
 app.listen(PORT, () => console.log(`Server Running On Port *${PORT}`));
