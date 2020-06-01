@@ -1,0 +1,22 @@
+main {
+    width: 100%;
+    background-color: darkkhaki;
+}
+
+.bogusHeader {
+    background-color: blue;
+}
+
+.listSection {
+    background-color: chartreuse;
+}
+
+.createSection {
+    background-color: crimson;
+}
+
+h1 {
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 5rem;
+    color: #ffffff;
+}
