@@ -9,11 +9,7 @@ import App from './components/App'
 
 
 class BogusComedians extends React.Component {
-    // state = {}
 
-    // componentDidMount() {
-
-    // }
 
     render () {
 
