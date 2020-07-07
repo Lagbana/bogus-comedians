@@ -15,9 +15,6 @@ const initializeRoutes = require('./routes')
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-const authService = new AuthService({ app });
-authService.initialize()
-
 mongoose.connect(process.env.MONGO_URI, {
     useCreateIndex: true,
     useNewUrlParser: true,
@@ -37,6 +34,9 @@ app.use(
 app.use(express.static(path.join(__dirname, '/client/build')));
 
 app.use(bodyParser.json());
+
+const authService = new AuthService({ app });
+authService.initialize();
 
 app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));

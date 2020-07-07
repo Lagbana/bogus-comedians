@@ -15,7 +15,7 @@ class AuthRoute {
     this.router.get(
       "/auth/github/callback",
       passport.authenticate("github", { failureRedirect: "/login" }),
-      (_, res) => res.redirect("/")
+      (_, res) => res.redirect("http://127.0.0.1:3000/")
     );
 
     // Local Auth Strategy

@@ -13,9 +13,9 @@ class AuthService extends ComedianDao {
   }
 
   initialize() {
-    const sessionConfig = this.sessionConfig();
+    const config = this.sessionConfig();
     this.app.use(cookieparser());
-    this.app.use(session(sessionConfig));
+    this.app.use(session(config));
 
     passport.serializeUser((user, done) => this.serialize(user, done));
     passport.deserializeUser((userId, done) => this.deSerialize(userId, done));
@@ -103,7 +103,6 @@ class AuthService extends ComedianDao {
         callbackURL: "http://127.0.0.1:8080/v1/api/auth/github/callback",
       },
       async (accessToken, refreshToken, profile, cb) => {
-        
         let user = await this.getUser({ githubId: profile.id });
         if (!user) {
           const { id, avatar_url, url, name, email, login } = profile["_json"];

@@ -7,11 +7,29 @@ import ReactDOM from "react-dom";
 // import BackgroundCard from './components/BackgroundCard'
 import App from "./components/App";
 import Login from "./pages/login";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 class BogusComedians extends React.Component {
+  constructor(props) {
+      super(props)
+      this.state = {}
+  }
+
   render() {
-    const isAuthenticated = localStorage.getItem("token");
+    const isAuthenticated = localStorage.getItem("user");
+    if (!isAuthenticated) {
+      fetch(`http://localhost:8080/v1/api/user`)
+        .then((response) => response.json())
+        .then((response) => { 
+            localStorage.setItem('user', JSON.stringify(response))
+            console.log(this.props)
+        });
+    }
 
     return (
       <Router>
