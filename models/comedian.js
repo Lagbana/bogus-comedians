@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const ComedianSchema = new Schema(
   {
-    firstname: {
+    name: {
       type: String,
-      required: true,
-    },
-    lastname: {
-      type: String,
-      required: true,
     },
     avatar: {
       type: String,
@@ -18,11 +12,12 @@ const ComedianSchema = new Schema(
     githubId: {
       type: String,
     },
-    // firstStandUpDate: {
-    //   bsonType: Date,
-    //   required: true,
-    // },
-    bestDadJoke: {
+    url: String,
+    email: {
+      type: String,
+      required: true,
+    },
+    username: {
       type: String,
       required: true,
     },

@@ -10,13 +10,15 @@ class AuthService extends ComedianDao {
     super();
     this.options = options;
     this.app = options.app;
-    this.app.use(cookieparser());
+  }
 
+  initialize() {
     const sessionConfig = this.sessionConfig();
+    this.app.use(cookieparser());
     this.app.use(session(sessionConfig));
 
-    passport.deserializeUser(this.deSerialize);
-    passport.serializeUser(this.serialize);
+    passport.serializeUser((user, done) => this.serialize(user, done));
+    passport.deserializeUser((userId, done) => this.deSerialize(userId, done));
 
     // Register passport strategies
     passport.use(this.localStrategy());
@@ -57,14 +59,14 @@ class AuthService extends ComedianDao {
     done(null, user._id);
   }
 
-  deSerialize(userId, done) {
-    this.getUser(userId)
-      .then(function (user) {
-        done(null, user);
-      })
-      .catch(function (err) {
-        done(err);
-      });
+  async deSerialize(userId, done) {
+    try {
+      const user = await this.getUser({ _id: userId });
+      return done(null, user);
+    } catch (err) {
+      console.error(err);
+      done(err);
+    }
   }
 
   localStrategy() {
@@ -100,11 +102,21 @@ class AuthService extends ComedianDao {
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: "http://127.0.0.1:8080/v1/api/auth/github/callback",
       },
-      (accessToken, refreshToken, profile, cb) => {
-        console.log({ accessToken, refreshToken, profile, cb });
-        this.user.findOrCreate({ githubId: profile.id }, (err, user) => {
-          return cb(err, user);
-        });
+      async (accessToken, refreshToken, profile, cb) => {
+        
+        let user = await this.getUser({ githubId: profile.id });
+        if (!user) {
+          const { id, avatar_url, url, name, email, login } = profile["_json"];
+          user = await this.createUser({
+            githubId: id,
+            avatar: avatar_url,
+            url,
+            name,
+            email,
+            username: login,
+          });
+        }
+        return cb(null, user);
       }
     );
   }
