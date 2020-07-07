@@ -15,6 +15,9 @@ const ComedianSchema = new Schema(
       type: String,
       required: true,
     },
+    githubId: {
+      type: String,
+    },
     // firstStandUpDate: {
     //   bsonType: Date,
     //   required: true,

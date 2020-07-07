@@ -6,6 +6,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
+const passport = require('passport')
+const { AuthService } = require('./services')
 
 const initializeRoutes = require('./routes')
 
@@ -38,6 +40,8 @@ app.use(bodyParser.json());
 app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
+
+new AuthService({ app });
 
 initializeRoutes(app)
 

@@ -1,21 +1,28 @@
 class ComedianRoute {
-    constructor(options = {}) {
-        this.options = options
-        this.router = options.Router
-        this.comedianService = new options.ComedianService()
-    }
+  constructor(options = {}) {
+    this.options = options;
+    this.router = options.Router;
+    this.comedianService = new options.ComedianService();
+  }
 
-    initialize() {
-        this.router.get('/users', (req, res) => this.retrieveUsers(req, res))
-    }
+  initialize() {
+    this.router.get("/users", (req, res) => this.retrieveUsers(req, res));
+    this.router.post("/users", (req, res) => this.createUser(req, res));
+  }
 
-    async retrieveUsers(req, res) {
-        try {
-            
-        } catch (err) {
-            throw err
-        }
+  async retrieveUsers(req, res) {
+    try {
+    } catch (err) {
+      throw err;
     }
+  }
+
+  async createUser() {
+    try {
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
-module.exports = ComedianRoute
+module.exports = ComedianRoute;

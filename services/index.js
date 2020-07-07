@@ -1,3 +1,4 @@
 module.exports = {
-    ComedianService: require('./comedianService')
+    ComedianService: require('./comedianService'),
+    AuthService: require('./authService')
 }
