@@ -1,4 +1,5 @@
 import React from "react";
+import { update } from "../services/withUser";
 
 class Button extends React.Component {
   render() {
@@ -15,8 +16,8 @@ class Button extends React.Component {
         <br />
         <button
           onClick={() => {
-            localStorage.removeItem("user");
-            window.location.reload();
+            update(null);
+            window.location.href = '/login'
           }}
           className={this.props.color}
           type={this.props.actionType}
